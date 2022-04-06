@@ -1,0 +1,63 @@
+[
+    {
+        "inputs": [{
+            "name": "_pid",
+            "type": "uint256"
+        },
+        {
+            "name": "_user",
+            "type": "address"
+        }],
+        "name": "pendingRewards",
+        "outputs": [
+            {
+                "name": "pending",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "name":"_pid",
+            "type": "uint256"
+        },
+        {
+            "name":"_user",
+           "type": "address"
+        }],
+        "name": "userInfo",
+        "outputs": [
+            {
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "name": "rewardDebt",
+                "type": "int256"
+            }
+
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "rewardsToken",
+        "outputs": [
+            {
+                "name":"token",
+                "type": "address"
+            }
+
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }
+
+    
+]
