@@ -23,22 +23,11 @@ const B_SDAO_6m_address = "0xF5738B4aD2f8302b926676692a0C09603d930b42";
 const B_NTX_3m_address = "0x502B965d3D51d4FD531E6A1c1fA9bFA50337bA55";
 const WETHNTXpoolAddress="0xB3D994978D2Bc50d2ce74c45FcD923E7C9c06730";
 
-const TT_instance = new web3.eth.Contract(tokenTracker, TokenTrackerAddress);
-const TT_instance2 = new web3.eth.Contract(tokenTracker, TokenTracker2Address);
+
 const SDAO_instance = new web3.eth.Contract(tokenAbi, SDAO);
 const NTX_instance = new web3.eth.Contract(tokenAbi, NTX);
-const B_SDAO_3m_INSTANCE = new web3.eth.Contract(
-  threemStakingAbi,
-  B_SDAO_3m_address
-);
-const B_SDAO_6m_INSTANCE = new web3.eth.Contract(
-  threemStakingAbi,
-  B_SDAO_6m_address
-);
-const B_NTX_3m_INSTANCE = new web3.eth.Contract(
-  threemStakingAbi,
-  B_NTX_3m_address
-);
+
+
 
 async function Token0(
   token0contract,
@@ -77,6 +66,8 @@ async function Token1(
 }
 
 async function getData1(address) {
+ const TT_instance = new web3.eth.Contract(tokenTracker, TokenTrackerAddress);
+
   const poolLength = await TT_instance.methods.poolLength().call();
 
   for (let i = 1; i < poolLength; i++) {
@@ -136,6 +127,16 @@ async function getData1(address) {
 }
 
 async function getData2(address) {
+  const TT_instance = new web3.eth.Contract(tokenTracker, TokenTrackerAddress);
+  const B_SDAO_3m_INSTANCE = new web3.eth.Contract(
+    threemStakingAbi,
+    B_SDAO_3m_address
+  );
+  const B_SDAO_6m_INSTANCE = new web3.eth.Contract(
+    threemStakingAbi,
+    B_SDAO_6m_address
+  );
+
   const info = await TT_instance.methods.userInfo(0, address).call();
   let balance = info.amount;
   const decimals = await SDAO_instance.methods.decimals().call();
@@ -157,6 +158,13 @@ async function getData2(address) {
 }
 
 async function getData3(address) {
+const TT_instance2 = new web3.eth.Contract(tokenTracker, TokenTracker2Address);
+
+const B_NTX_3m_INSTANCE = new web3.eth.Contract(
+  threemStakingAbi,
+  B_NTX_3m_address
+);
+
   const info = await TT_instance2.methods.userInfo(1, address).call();
   let balance = info.amount;
   const decimals = await NTX_instance.methods.decimals().call();
@@ -179,6 +187,9 @@ async function getData4(address){
         poolAbi,
         WETHNTXpoolAddress
       )
+const TT_instance2 = new web3.eth.Contract(tokenTracker, TokenTracker2Address);
+
+      
 
     let LptokensReceived=await TT_instance2.methods.userInfo(0,address).call();
   LptokensReceived=LptokensReceived.amount;
