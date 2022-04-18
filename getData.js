@@ -87,7 +87,7 @@ async function getData1(address) {
     var token0 = await LPInstance.methods.token0().call();
     var token1 = await LPInstance.methods.token1().call();
     const token0contract = new web3.eth.Contract(tokenAbi, token0);
-    const token1contract = new web3.eth.Contract(poolAbi, token1);
+    const token1contract = new web3.eth.Contract(tokenAbi, token1);
     let Symbol0 = await token0contract.methods.symbol().call();
     let Symbol1 = await token1contract.methods.symbol().call();
 
@@ -151,10 +151,15 @@ async function getData2(address) {
   let stake6m = await B_SDAO_6m_INSTANCE.methods.balances(address).call();
   stake6m = (stake6m / 10 ** decimals).toFixed(2);
 
+  if(balance1=0 || stake3m!=0 || stake6m!=0){
   console.log("SDAO staking:");
+  if(balance!=0)
   console.log("balance:", balance, "rewards:", rewards);
+  if(stake3m!=0)
   console.log("SDAO-3m-balance:", stake3m);
+  if(stake6m!=0)
   console.log("SDAO-6m-balance:", stake6m);
+  }
 }
 
 async function getData3(address) {
@@ -176,9 +181,13 @@ const B_NTX_3m_INSTANCE = new web3.eth.Contract(
   let stake = await B_NTX_3m_INSTANCE.methods.balances(address).call();
   stake = (stake / 10 ** decimals).toFixed(2);
 
+  if(balance!=0 || stake!=0){
   console.log("NTX staking:");
+  if(balance!=0)
   console.log("balance:", balance, "rewards:", rewards);
+  if(stake!=0)
   console.log("NTX-3m-balance:", stake);
+  }
 }
 
 async function getData4(address){
@@ -222,7 +231,7 @@ const TT_instance2 = new web3.eth.Contract(tokenTracker, TokenTracker2Address);
   }
 }
 
-let address = readline.question("enter address:");
+let address = "0x0ad7a09575e3ec4c109c4faa3be7cdafc5a4adba";
 getData1(address);
 getData2(address);
 getData3(address);
